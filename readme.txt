@@ -21,3 +21,7 @@ iJfe7HgCpNw9ms!
 XgHXnJG9mLNhBwly   lovendarst
 
 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NmQ3ZmZmNjIyOTFjZTUwYTYyYmQzYyIsImlhdCI6MTc1MjAwNjcxNywiZXhwIjoxNzUyMDkzMTE3fQ.lzgRk2ET2vnfgyvCzSTMHThvsNZxaL4Y9YSdeq8OdMM",
+
+
+db connection.
+    // mongoose.connect('mongodb+srv://lovendrast0102:XgHXnJG9mLNhBwly@cluster0.uevt97m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')

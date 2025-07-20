@@ -1,5 +1,6 @@
 // config/db.js
 const mongoose = require('mongoose');
+require('dotenv').config(); // Load environment variables from .env file
 
 const connectDB = async () => {
   try {
@@ -7,10 +8,10 @@ const connectDB = async () => {
     //   useNewUrlParser: true,
     //   useUnifiedTopology: true,
     // });
-    mongoose.connect('mongodb+srv://lovendrast0102:XgHXnJG9mLNhBwly@cluster0.uevt97m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+
       
 
-    // mongoose.connect(MONGO_URI);
+    mongoose.connect(process.env.MONGO_URI);
 
 
     

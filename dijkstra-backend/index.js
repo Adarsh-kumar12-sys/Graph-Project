@@ -22,6 +22,8 @@ app.use(bodyParser.json());
 const dijkstraRoutes = require('./routes/dijkstraRoutes');
 const authRoutes = require('./routes/authRoutes');
 const graphRoutes = require('./routes/graphRoutes');
+const { config } = require('dotenv');
+
 
 app.use('/api', dijkstraRoutes);
 app.use("/api/auth", authRoutes);
