@@ -2,11 +2,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // ✅ Import AuthContext
+import { toast } from 'react-toastify';
+import { greenToast } from '../utils/toastStyles'; // adjust path if needed
+import { redToast } from '../utils/toastStyles';
+
+
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth(); // ✅ Destructure login from context
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,12 +25,11 @@ const LoginPage = () => {
         password,
       });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("username", res.data.username);
-      alert("Login successful!");
-      navigate("/"); // Go back to graph
+      login(res.data.token, res.data.username); // ✅ Call context's login function
+      toast("Login successful!", greenToast);
+      navigate("/network-designer"); // Go back to graph
     } catch (err) {
-      alert("Login failed: " + err.response?.data?.message || err.message);
+      toast("Login failed: " + (err.response?.data?.message || err.message), redToast);
     }
   };
 

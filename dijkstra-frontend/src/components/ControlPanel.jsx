@@ -1,6 +1,8 @@
 // src/components/ControlPanel.jsx
 import React, { useState, useEffect } from 'react';
 import MstOutput from './MstOutput';
+import { toast } from 'react-toastify';
+import { redToast } from '../utils/toastStyles'; 
 
 // Define buttonBase outside or at the very top of the styles object
 const buttonBaseStyle = {
@@ -32,6 +34,11 @@ const ControlPanel = ({
   const [selectedSourceNode, setSelectedSourceNode] = useState('');
   const [selectedTargetNode, setSelectedTargetNode] = useState('');
   const [edgeWeight, setEdgeWeight] = useState('');
+  const [savedDesigns, setSavedDesigns] = useState([]);
+  const [selectedDesignId, setSelectedDesignId] = useState('');
+
+
+
 
   useEffect(() => {
     if (nodes.length === 0) {
@@ -50,17 +57,17 @@ const ControlPanel = ({
 
   const handleAddEdgeClick = () => {
     if (!selectedSourceNode || !selectedTargetNode || edgeWeight === '') {
-      alert('Please select source and target nodes and enter a weight.');
+      toast('Please select source and target nodes and enter a weight.', redToast);
       return;
     }
     if (selectedSourceNode === selectedTargetNode) {
-      alert('Source and target nodes cannot be the same for an edge.');
+      toast('Source and target nodes cannot be the same for an edge.', redToast);
       return;
     }
 
     const weight = parseFloat(edgeWeight);
     if (isNaN(weight)) {
-      alert('Please enter a valid number for edge weight.');
+      toast('Please enter a valid number for edge weight.', redToast);
       return;
     }
 
@@ -69,6 +76,24 @@ const ControlPanel = ({
     setSelectedTargetNode('');
     setEdgeWeight('');
   };
+  const fetchSavedDesigns = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:5000/api/mst/designs', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!res.ok) throw new Error('Failed to fetch designs');
+      const data = await res.json();
+      setSavedDesigns(data);
+    } catch (err) {
+      console.error('Fetch designs error:', err);
+      toast('Failed to load saved designs.', redToast);
+    }
+  };
+
 
   return (
     <div style={styles.panelContainer}>
@@ -76,7 +101,13 @@ const ControlPanel = ({
         <h2 style={styles.sectionTitle}>Controls</h2>
 
         <div style={styles.buttonGroup}>
-          <button style={styles.addNodeButton} onClick={onAddNode}>➕ Add Node</button>
+          <button
+  style={styles.addNodeButton}
+  onClick={onAddNode}  // ✅ Let the parent handle prompt
+>
+  ➕ Add Node
+</button>
+
           <button style={styles.clearButton} onClick={onClear}>♻️ Clear</button>
         </div>
 
@@ -132,19 +163,63 @@ const ControlPanel = ({
 
         <div style={styles.buttonGroup}>
           <button style={styles.saveButtonSmall} onClick={onSave}>💾 Save</button>
-          <button style={styles.loadButtonSmall} onClick={onLoad}>📂 Load Saved</button>
+          <button style={styles.loadButtonSmall} onClick={fetchSavedDesigns}>📂 Load Saved</button>
         </div>
+
+        {savedDesigns.length > 0 && (
+          <>
+            <label style={{ marginBottom: '5px', fontWeight: 'bold' }}>
+              Select a Saved Design:
+            </label>
+            <select
+              style={styles.selectInput}
+              onChange={(e) => setSelectedDesignId(e.target.value)}
+              value={selectedDesignId}
+            >
+              <option value="">-- Select a design --</option>
+              {Array.isArray(savedDesigns) && savedDesigns.map((design) => {
+                // Add a check to ensure 'design' is not null or undefined
+                if (!design) {
+                  return null; // Skip rendering if the design object is invalid
+                }
+                const label = design.name || design.title || `Design ${design._id || 'Unknown ID'}`;
+                return (
+                  <option key={design._id || label} value={design._id}>
+                    {label}
+                  </option>
+                );
+              })}
+            </select>
+
+            {/* Load the selected design by ID */}
+            <button
+              style={styles.loadButtonSmall}
+              onClick={() => {
+                if (selectedDesignId) {
+                  onLoad(selectedDesignId);
+                } else {
+                  toast('Please select a design to load.', redToast);
+                }
+              }}
+            >
+              🔄 Load Design
+            </button>
+          </>
+        )}
+
 
         <div style={styles.runAlgorithmSection}>
           <button style={styles.runPrimButton} onClick={onDesignNetwork}>
-            🧮 Run Prim's Algorithm
+            🧮 Design Optimal Pipeline
           </button>
+
         </div>
       </div>
 
       <div style={styles.outputSection}>
         <h3 style={styles.sectionTitle}>MST Output</h3>
-        <MstOutput nodes={nodes} mstResult={mstResult} />
+       <MstOutput mstResult={mstResult} originalNodes={nodes} />
+
       </div>
     </div>
   );
@@ -152,7 +227,7 @@ const ControlPanel = ({
 
 const styles = {
   panelContainer: {
-    width: '380px',
+    width: '500px', // ✅ Increased width
     padding: '20px',
     background: 'white',
     borderRadius: '8px',
@@ -185,20 +260,20 @@ const styles = {
   },
   clearButton: {
     ...buttonBaseStyle,
-    background: '#dc3545',
+    background: '#f86c6b', // ✅ Softer red
     flexBasis: 'calc(50% - 5px)',
   },
   saveButtonSmall: {
     ...buttonBaseStyle,
-    background: '#28a745',
+    background: '#3eda55ff', // ✅ Softer green
     padding: '8px 12px',
     fontSize: '0.8em',
     flexBasis: 'calc(50% - 5px)',
   },
   loadButtonSmall: {
     ...buttonBaseStyle,
-    background: '#ffc107',
-    color: '#333',
+    background: '#f6d463', // ✅ Softer yellow
+    //color: '#333',
     padding: '8px 12px',
     fontSize: '0.8em',
     flexBasis: 'calc(50% - 5px)',
@@ -220,18 +295,22 @@ const styles = {
     marginBottom: '5px',
   },
   inlineInputRow: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '8px',
-    marginBottom: '5px',
-    alignItems: 'flex-end',
-  },
-  inputGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '3px',
-    flex: 1,
-  },
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '8px',
+  marginBottom: '5px',
+  alignItems: 'flex-end',
+  // Remove maxWidth or increase it to fit 3 inputs
+  maxWidth: '350px',  // or '100%' if you want it full-width inside its parent
+}
+  ,
+  iinputGroup: {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '3px',
+  // Remove flex: 1
+  width: '100px',  // ⬅️ fixed input width per group
+},
   label: {
     fontSize: '0.75em',
     color: '#555',
@@ -246,13 +325,15 @@ const styles = {
     backgroundColor: 'white',
     boxSizing: 'border-box',
   },
-  textInput: {
-    padding: '6px',
-    borderRadius: '4px',
-    border: '1px solid #ced4da',
-    fontSize: '0.85em',
-    boxSizing: 'border-box',
-  },
+ textInput: {
+  padding: '6px',
+  borderRadius: '4px',
+  border: '1px solid #ced4da',
+  fontSize: '0.85em',
+  boxSizing: 'border-box',
+  width: '175px', // match inputGroup width
+},
+
   addEdgeFormButton: {
     ...buttonBaseStyle,
     background: '#17a2b8',
@@ -264,12 +345,13 @@ const styles = {
     marginTop: '10px',
   },
   runPrimButton: {
-    ...buttonBaseStyle,
-    background: '#6f42c1',
-    width: '100%',
-    padding: '12px 15px',
-    fontSize: '1em',
-  },
+  ...buttonBaseStyle,
+  background: '#4f46e5', // ✅ Tailwind's bg-indigo-600
+  width: '100%',         // keep existing width if you want
+  padding: '12px 15px',  // original padding preserved
+  fontSize: '1em',       // original font size preserved
+},
+
   outputSection: {
     flexGrow: 1,
     marginTop: '20px',

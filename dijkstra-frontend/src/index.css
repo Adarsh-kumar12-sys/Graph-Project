@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.react-flow__renderer {
+  cursor: crosshair !important; /* or pointer, or use a custom one */
+}
+
 /* @layer base {
   body {
     @apply bg-gray-100 text-gray-900;

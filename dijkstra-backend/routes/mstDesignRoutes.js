@@ -11,7 +11,7 @@ const {
 
 const authMiddleware = require('../middleware/authMiddleware'); // ✅ Your auth
 
-//router.use(authMiddleware); // Apply to all routes
+router.use(authMiddleware); // Apply to all routes
 
 router.get('/', getAllDesigns);
 router.get('/:id', getDesignById);
