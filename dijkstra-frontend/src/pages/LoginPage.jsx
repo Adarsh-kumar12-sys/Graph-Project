@@ -1,12 +1,24 @@
 // src/pages/LoginPage.jsx
-import React, { useState } from "react";
+// import React, { useState } from "react";    // new comment out
+
+import React, { useState, useEffect } from "react"; // ✅ include useEffect   // new
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";   // new
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const { login, isLoggedIn } = useAuth(); // ✅ new
+
+
+  useEffect(() => {                       // new
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn]); // ✅ Prevents access if already logged in
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,8 +29,12 @@ const LoginPage = () => {
         password,
       });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("username", res.data.username);
+      // localStorage.setItem("token", res.data.token);         // new comment out
+      // localStorage.setItem("username", res.data.username);   // new comment out
+
+      login(res.data.token, res.data.username);       // new
+
+
       alert("Login successful!");
       navigate("/"); // Go back to graph
     } catch (err) {

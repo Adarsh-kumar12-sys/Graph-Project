@@ -4,9 +4,12 @@
 // import cors from "cors";
 // import bodyParser from "body-parser";
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const connectDB = require('./config/db'); // 👈 Import
+const cors = require('cors'); // Importing CORS for handling cross-origin requests                   
+const bodyParser = require('body-parser'); // Importing body-parser for parsing JSON requests
+const connectDB = require('./config/db');  
+const dotenv = require('dotenv');         
+
+dotenv.config(); // Load environment variables from .env file      
 
 const app = express();
 const PORT = 5000;
@@ -22,15 +25,18 @@ app.use(bodyParser.json());
 const dijkstraRoutes = require('./routes/dijkstraRoutes');
 const authRoutes = require('./routes/authRoutes');
 const graphRoutes = require('./routes/graphRoutes');
+
+const schedulerRoutes = require("./routes/scheduler");  
 const { config } = require('dotenv');
 
 
 app.use('/api', dijkstraRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/graphs", graphRoutes);
+app.use("/api/topo", schedulerRoutes);  
 
 app.get('/', (req, res) => {
-  res.send('Dijkstra Backend is running 🚀');
+  res.send('Dijkstra and topo Backend is running 🚀');
 });
 
 app.listen(PORT, () => {
