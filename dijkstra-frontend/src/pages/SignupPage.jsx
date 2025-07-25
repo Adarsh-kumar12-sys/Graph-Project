@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { greenToast } from '../utils/toastStyles';
+import { redToast } from '../utils/toastStyles';
 
 const SignupPage = () => {
   const [username, setUsername] = useState(""); // matches backend
@@ -19,10 +22,10 @@ const SignupPage = () => {
         password,
       });
 
-      alert("Signup successful! Please login.");
+     toast("Signup successful! Please login.", greenToast);
       navigate("/login");
     } catch (err) {
-      alert("Signup failed: " + err.response?.data?.message || err.message);
+      toast("Signup failed: " + (err.response?.data?.message || err.message), redToast);
     }
   };
 

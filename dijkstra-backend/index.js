@@ -26,14 +26,23 @@ const dijkstraRoutes = require('./routes/dijkstraRoutes');
 const authRoutes = require('./routes/authRoutes');
 const graphRoutes = require('./routes/graphRoutes');
 
+const mstRoutes = require('./routes/mstRoutes');
+
 const schedulerRoutes = require("./routes/scheduler");  
+
 const { config } = require('dotenv');
 
 
-app.use('/api', dijkstraRoutes);
+//app.use('/api', dijkstraRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/graphs", graphRoutes);
+
+app.use('/api/mst', mstRoutes);
+app.use("/api/mstDesign", require("./routes/mstDesignRoutes"));
+app.use('/api/mst/designs', require('./routes/mstDesignRoutes'));
+
 app.use("/api/topo", schedulerRoutes);  
+
 
 app.get('/', (req, res) => {
   res.send('Dijkstra and topo Backend is running 🚀');
