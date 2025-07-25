@@ -1,7 +1,11 @@
 // src/pages/LoginPage.jsx
-import React, { useState } from "react";
+// import React, { useState } from "react";    // new comment out
+
+import React, { useState, useEffect } from "react"; // ✅ include useEffect   // new
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 import { useAuth } from "../context/AuthContext"; // ✅ Import AuthContext
 import { toast } from 'react-toastify';
 import { greenToast } from '../utils/toastStyles'; // adjust path if needed
@@ -16,6 +20,13 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth(); // ✅ Destructure login from context
 
+  const { login, isLoggedIn } = useAuth(); // ✅ new
+
+
+  useEffect(() => {                       // new
+    if (isLoggedIn) navigate("/");
+  }, [isLoggedIn]); // ✅ Prevents access if already logged in
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -25,9 +36,14 @@ const LoginPage = () => {
         password,
       });
 
+
       login(res.data.token, res.data.username); // ✅ Call context's login function
       toast("Login successful!", greenToast);
-      navigate("/network-designer"); // Go back to graph
+
+      // localStorage.setItem("token", res.data.token);         // new comment out
+      // localStorage.setItem("username", res.data.username);   // new comment out
+      navigate("/"); // Go back to graph
+
     } catch (err) {
       toast("Login failed: " + (err.response?.data?.message || err.message), redToast);
     }
