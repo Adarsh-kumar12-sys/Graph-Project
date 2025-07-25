@@ -13,8 +13,8 @@ import MstEditor from './pages/MstEditor'; // Main MST UI
 
 function App() {
   return (
+
     <AuthProvider>
-      <Router>
         <div>
           <Routes>
             <Route path="/" element={<HomePage />} /> {/* Add HomePage route */}
@@ -27,7 +27,6 @@ function App() {
           </Routes>
         </div>
       </AuthProvider>
-    </BrowserRouter>
   );
 }
 

@@ -38,7 +38,7 @@ const HomePage = () => {
       title: "Prim’s Pipeline Network Simulator",
       summary: "Build minimum-cost pipeline networks using Prim’s Algorithm.",
       buttonText: "View Simulation",
-      route: "/bellman-ford", // adjust this route if needed
+      route: "/network-designer", // adjust this route if needed
       color: "green"
     },
     {

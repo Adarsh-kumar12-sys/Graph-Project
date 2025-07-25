@@ -18,7 +18,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth(); // ✅ Destructure login from context
+  // const { login } = useAuth(); // ✅ Destructure login from context
 
   const { login, isLoggedIn } = useAuth(); // ✅ new
 

@@ -4,9 +4,12 @@ import './index.css'
 import App from './App.jsx'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter } from 'react-router-dom'; // ✅ Import BrowserRouter
 
 createRoot(document.getElementById('root')).render(
+
   <StrictMode>
+    <BrowserRouter>
     <App />
      <ToastContainer
         position="top-center"
@@ -18,5 +21,6 @@ createRoot(document.getElementById('root')).render(
         theme="light"
         style={{ zIndex: 9999 }}
       />
+    </BrowserRouter>
   </StrictMode>,
 )
