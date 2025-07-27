@@ -12,13 +12,27 @@ const dotenv = require('dotenv');
 dotenv.config(); // Load environment variables from .env file      
 
 const app = express();
-const PORT = 5000;
+// const PORT = 5000;
+
+const PORT = process.env.PORT || 5000; // Use PORT from environment variables or default to 5000
 
 // Connect MongoDB
 connectDB();
 
 // Middleware
-app.use(cors());
+// app.use(cors());
+
+app.use(
+    cors({
+        origin: 'http://localhost:5173', // frontend link
+        // origin: process.env.FRONTEND_URL,
+        // origin: "*",
+        credentials: true
+    })
+);
+
+
+
 app.use(bodyParser.json());
 
 // Routes

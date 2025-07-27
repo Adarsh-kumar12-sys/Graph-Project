@@ -7,6 +7,11 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+
+# Ignore all node_modules anywhere in the project
+**/node_modules/
+
+
 node_modules
 dist
 dist-ssr
@@ -28,5 +33,3 @@ dist-ssr
 
 # i want to ignore readme.txt file
 readme.txt
-
-
