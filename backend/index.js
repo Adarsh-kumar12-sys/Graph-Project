@@ -23,12 +23,34 @@ connectDB();
 // app.use(cors());
 
 
-// this allows only this given frontend url to access these backend API 
-app.use(                                    
+// // this allows only this given frontend url to access these backend API 
+
+// app.use(                                    
+//     cors({
+//         origin: 'https://graph-frontend-xol8.onrender.com', // frontend link
+//         // origin: process.env.FRONTEND_URL,
+//         // origin: "*",
+//         credentials: true
+//     })
+// );
+
+
+// if want to use mulltiple cors origins
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://graph-frontend-xol8.onrender.com' // Add your production frontend URL here
+];
+
+app.use(
     cors({
-        origin: 'https://graph-frontend-xol8.onrender.com', // frontend link
-        // origin: process.env.FRONTEND_URL,
-        // origin: "*",
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
+
         credentials: true
     })
 );
