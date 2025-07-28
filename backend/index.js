@@ -26,7 +26,7 @@ connectDB();
 // this allows only this given frontend url to access these backend API 
 app.use(                                    
     cors({
-        origin: 'http://localhost:5173', // frontend link
+        origin: 'https://graph-frontend-xol8.onrender.com', // frontend link
         // origin: process.env.FRONTEND_URL,
         // origin: "*",
         credentials: true
