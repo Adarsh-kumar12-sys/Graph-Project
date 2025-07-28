@@ -6,6 +6,8 @@ import AboutSection from "../components/AboutSection";
 import Footer from "../components/Footer";
 import { FaMapMarkedAlt, FaProjectDiagram, FaListOl, FaWrench } from "react-icons/fa";
 import { motion } from "framer-motion";
+import ProfilePic from '../assets/profilepic2.jpg';
+// or
 
 
 const HomePage = () => {
@@ -141,9 +143,14 @@ const HomePage = () => {
             <div className="absolute inset-0 w-full h-full rounded-full bg-gradient-to-tr from-blue-300 via-indigo-200 to-indigo-400 blur-2xl opacity-70 z-0 animate-pulse" />
             <div className="relative z-10 w-48 h-48 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 p-1 flex items-center justify-center shadow-2xl">
             <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
-                <svg className="h-32 w-32 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              {/* <svg className="h-32 w-32 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                </svg>
+              </svg> */}
+                <img
+                  src={ProfilePic}
+                  alt="Profile"
+                  className="object-cover w-full h-full rounded-full"
+                />
             </div>
             </div>
         </div>

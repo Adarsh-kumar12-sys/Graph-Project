@@ -22,7 +22,9 @@ connectDB();
 // Middleware
 // app.use(cors());
 
-app.use(
+
+// this allows only this given frontend url to access these backend API 
+app.use(                                    
     cors({
         origin: 'http://localhost:5173', // frontend link
         // origin: process.env.FRONTEND_URL,
@@ -30,6 +32,7 @@ app.use(
         credentials: true
     })
 );
+
 
 
 
