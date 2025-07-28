@@ -4,6 +4,7 @@ import MstOutput from './MstOutput';
 import { toast } from 'react-toastify';
 import { redToast } from '../utils/toastStyles'; 
 
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';   
 
 // Define buttonBase outside or at the very top of the styles object
 const buttonBaseStyle = {
@@ -80,7 +81,7 @@ const ControlPanel = ({
   const fetchSavedDesigns = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/mst/designs', {
+      const res = await fetch(`${API_BASE_URL}/api/mst/designs`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

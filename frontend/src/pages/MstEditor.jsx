@@ -13,6 +13,8 @@ import ControlPanel from '../components/ControlPanel';
 import GraphDisplay from '../components/GraphDisplay';
 import PromptDialog from '../components/PromptDialog'; // adjust path
 
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';
+
 const getRandomPosition = () => ({
   x: Math.random() * 400 + 50, // These values should match what you use in handleAddNode
   y: Math.random() * 400 + 50, // Adjust range as needed for initial placement
@@ -161,8 +163,7 @@ const handleAddNodeNameSubmit = (nameInput) => {
       // console.log("Auth token from context:", token);
       // console.log("Graph data being sent:", graphData);
 
-      const response = await axios.post(
-        "http://localhost:5000/api/mst/calculate",
+      const response = await axios.post(`${API_BASE_URL}/api/mst/calculate`,
         graphData,
         {
           headers: {
@@ -210,7 +211,7 @@ const handleAddNodeNameSubmit = (nameInput) => {
   }
 
   try {
-    await axios.post('http://localhost:5000/api/mstDesign', {
+    await axios.post(`${API_BASE_URL}/api/mstDesign`, {
       name: value,
       nodes: nodes.map(n => ({
         id: n.id,
@@ -259,7 +260,7 @@ const handleAddNodeNameSubmit = (nameInput) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:5000/api/mst/designs/${designId}`, {
+      const response = await axios.get(`${API_BASE_URL}/api/mst/designs/${designId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

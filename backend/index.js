@@ -14,7 +14,7 @@ dotenv.config(); // Load environment variables from .env file
 const app = express();
 // const PORT = 5000;
 
-const PORT = process.env.PORT || 5000; // Use PORT from environment variables or default to 5000
+const PORT = process.env.PORT ; // Use PORT from environment variables or default to 5000
 
 // Connect MongoDB
 connectDB();

@@ -12,6 +12,9 @@ import { greenToast } from '../utils/toastStyles'; // adjust path if needed
 import { redToast } from '../utils/toastStyles';
 
 
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';  
+
+
 
 
 const LoginPage = () => {
@@ -31,7 +34,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email,
         password,
       });

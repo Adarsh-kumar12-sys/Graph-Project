@@ -315,7 +315,8 @@ function CourseSchedulerPage() {
   const [editMode, setEditMode] = useState(false);
   const [editPlanId, setEditPlanId] = useState(null);
 
-  const API_BASE_URL = 'http://localhost:5000';
+  // const API_BASE_URL = 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';  
   const { token } = useAuth();
 
   const fetchPlans = useCallback(async () => {

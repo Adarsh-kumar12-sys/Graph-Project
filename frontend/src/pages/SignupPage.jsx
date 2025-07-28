@@ -6,6 +6,9 @@ import { toast } from 'react-toastify';
 import { greenToast } from '../utils/toastStyles';
 import { redToast } from '../utils/toastStyles';
 
+
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';
+
 const SignupPage = () => {
   const [username, setUsername] = useState(""); // matches backend
   const [email, setEmail] = useState("");
@@ -16,7 +19,7 @@ const SignupPage = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/signup`, {
         username,
         email,
         password,

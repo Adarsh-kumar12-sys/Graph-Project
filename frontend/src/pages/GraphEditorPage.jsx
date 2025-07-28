@@ -19,6 +19,11 @@ const GraphEditorPage = () => {
 
   const { isLoggedIn, token } = useAuth();
 
+  // const API_BASE_URL = import.meta.env.VITE_API_URL;
+  // http://localhost:5000/api/dijkstra
+  const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000'; // Fallback to local server if env variable not set
+  // const API_BASE_URL = "http://localhost:5000";
+
   // Add Node
   const addNode = () => {
     const id = (nodes.length + 1).toString();
@@ -49,7 +54,7 @@ const GraphEditorPage = () => {
     const nodeIds = nodes.map((n) => n.id);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/dijkstra", {
+      const res = await axios.post(`${API_BASE_URL}/api/dijkstra`, {
         nodes: nodeIds,
         edges: formattedEdges,
         source,
@@ -86,8 +91,7 @@ const GraphEditorPage = () => {
     const nodeIds = nodes.map((n) => n.id);
 
     try {
-      await axios.post(
-        "http://localhost:5000/api/graphs/save",
+      await axios.post(`${API_BASE_URL}/api/graphs/save`,
         {
           name: graphName,
           nodes: nodeIds,
@@ -129,7 +133,7 @@ const GraphEditorPage = () => {
     }
 
     try {
-      const res = await axios.get("http://localhost:5000/api/graphs/my-graphs", {
+      const res = await axios.get(`${API_BASE_URL}/api/graphs/my-graphs`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -146,7 +150,7 @@ const GraphEditorPage = () => {
   const deleteGraph = async (id) => {
     if (!window.confirm("Are you sure you want to delete this graph?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/graphs/delete/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/graphs/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
