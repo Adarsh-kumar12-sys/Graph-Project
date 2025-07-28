@@ -50,7 +50,7 @@ const schedulerRoutes = require("./routes/scheduler");
 const { config } = require('dotenv');
 
 
-//app.use('/api', dijkstraRoutes);
+app.use("/api", dijkstraRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/graphs", graphRoutes);
 
