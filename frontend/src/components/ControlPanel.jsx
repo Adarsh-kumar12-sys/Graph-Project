@@ -4,7 +4,7 @@ import MstOutput from './MstOutput';
 import { toast } from 'react-toastify';
 import { redToast } from '../utils/toastStyles'; 
 
-const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';   
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL ;   
 
 // Define buttonBase outside or at the very top of the styles object
 const buttonBaseStyle = {

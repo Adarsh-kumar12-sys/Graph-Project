@@ -1,11 +1,10 @@
 // import jwt from "jsonwebtoken";
 
 const jwt = require("jsonwebtoken");
-// dotenv = require("dotenv"); // Import dotenv to access environment variables
-// dotenv.config(); // Load environment variables from .env file
+
 require('dotenv').config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "yoursecretkey";
+const JWT_SECRET = process.env.JWT_SECRET ;
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;     

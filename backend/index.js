@@ -48,7 +48,7 @@ app.use("/api/topo", schedulerRoutes);
 
 
 app.get('/', (req, res) => {
-  res.send('Dijkstra and topo Backend is running 🚀');
+  res.send('Backend is running 🚀');
 });
 
 app.listen(PORT, () => {
