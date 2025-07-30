@@ -12,8 +12,9 @@ import { redToast } from '../utils/toastStyles';
 import ControlPanel from '../components/ControlPanel';
 import GraphDisplay from '../components/GraphDisplay';
 import PromptDialog from '../components/PromptDialog'; // adjust path
+import { FaHome } from "react-icons/fa";
 
-const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL ;
 
 const getRandomPosition = () => ({
   x: Math.random() * 400 + 50, // These values should match what you use in handleAddNode
@@ -373,8 +374,17 @@ const handleAddNodeNameSubmit = (nameInput) => {
 
 
       <div style={appStyles.header}>
+        <div className="flex flex-row  gap-4">
+         <button
+                          className="p-2 rounded-full text-indigo-500 bg-white hover:bg-indigo-50 shadow transition"
+                          title="Go to Home"
+                          onClick={() => window.location.href = "/"}
+                          aria-label="Home"
+                        >
+                          <FaHome className="w-6 h-6" />
+                        </button>
         <h1 style={appStyles.headerTitle}>Pipeline Network Designer</h1>
-
+        </div>
 
         <div style={appStyles.userInfo}>
           {isLoggedIn ? (
@@ -383,7 +393,8 @@ const handleAddNodeNameSubmit = (nameInput) => {
               <button
                 onClick={() => {
                   localStorage.removeItem("token");
-                  navigate("/");
+                  window.location.reload();
+                  
                 }}
                 style={appStyles.logoutButton}
               >

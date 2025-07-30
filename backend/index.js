@@ -1,8 +1,4 @@
-// import authRoutes from "./routes/authRoutes.js";
-// import graphRoutes from "./routes/graphRoutes.js";
-// import express from "express";
-// import cors from "cors";
-// import bodyParser from "body-parser";
+
 const express = require('express');
 const cors = require('cors'); // Importing CORS for handling cross-origin requests                   
 const bodyParser = require('body-parser'); // Importing body-parser for parsing JSON requests
@@ -12,49 +8,17 @@ const dotenv = require('dotenv');
 dotenv.config(); // Load environment variables from .env file      
 
 const app = express();
-// const PORT = 5000;
 
-const PORT = process.env.PORT ; // Use PORT from environment variables or default to 5000
+
+const PORT = process.env.PORT ; 
 
 // Connect MongoDB
 connectDB();
 
-// Middleware
-// app.use(cors());
-
-
-// // this allows only this given frontend url to access these backend API 
-
-// app.use(                                    
-//     cors({
-//         origin: 'https://graph-frontend-xol8.onrender.com', // frontend link
-//         // origin: process.env.FRONTEND_URL,
-//         // origin: "*",
-//         credentials: true
-//     })
-// );
-
-
-// if want to use mulltiple cors origins
-const allowedOrigins = [
-    'http://localhost:5173',
-    'https://graph-frontend-xol8.onrender.com' // Add your production frontend URL here
-];
-
-app.use(
-    cors({
-        origin: function (origin, callback) {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error('Not allowed by CORS'));
-            }
-        },
-
-        credentials: true
-    })
-);
-
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+}));
 
 
 

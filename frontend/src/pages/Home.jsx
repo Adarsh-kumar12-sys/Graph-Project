@@ -24,7 +24,9 @@ const HomePage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-400">
             <button
-              onClick={() => navigate("/login")}
+              onClick={() =>navigate("/login", { state: { from: "/home-pipeline" } })}
+           
+
               className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
               Login

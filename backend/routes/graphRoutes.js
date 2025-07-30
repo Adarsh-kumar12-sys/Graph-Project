@@ -1,6 +1,3 @@
-// import express from "express";
-// import { saveGraph, getUserGraphs } from "../controllers/graphController.js";
-// import authMiddleware from "../middleware/authMiddleware.js";
 
 const express = require('express');
 const { saveGraph, getUserGraphs, deleteGraph } = require('../controllers/graphController.js');

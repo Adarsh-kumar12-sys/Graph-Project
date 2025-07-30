@@ -1,51 +1,38 @@
-// src/pages/LoginPage.jsx
-// import React, { useState } from "react";    // new comment out
-
-import React, { useState, useEffect } from "react"; // ✅ include useEffect   // new
-
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
-import { useAuth } from "../context/AuthContext"; // ✅ Import AuthContext
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { toast } from 'react-toastify';
-import { greenToast } from '../utils/toastStyles'; // adjust path if needed
+import { greenToast } from '../utils/toastStyles';
 import { redToast } from '../utils/toastStyles';
 
-
-const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';  
-
-
-
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  // const { login } = useAuth(); // ✅ Destructure login from context
+  const location = useLocation();
 
-  const { login, isLoggedIn } = useAuth(); // ✅ new
-
-
-  useEffect(() => {                       // new
-    if (isLoggedIn) navigate("/");
-  }, [isLoggedIn]); // ✅ Prevents access if already logged in
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email,
         password,
       });
 
-
-      login(res.data.token, res.data.username); // ✅ Call context's login function
+      login(res.data.token, res.data.username);
       toast("Login successful!", greenToast);
 
-      // localStorage.setItem("token", res.data.token);         // new comment out
-      // localStorage.setItem("username", res.data.username);   // new comment out
-      navigate("/"); // Go back to graph
+      // ✅ Fixed redirect logic based on where the user came from
+      const redirectPath = location.state?.from === "/home-pipeline"
+        ? "/network-designer"
+        : location.state?.from || "/";
+
+      navigate(redirectPath, { replace: true });
 
     } catch (err) {
       toast("Login failed: " + (err.response?.data?.message || err.message), redToast);
@@ -78,7 +65,10 @@ const LoginPage = () => {
       </form>
       <p className="mt-4 text-center">
         Don't have an account?{" "}
-        <span className="text-blue-600 cursor-pointer" onClick={() => navigate("/signup")}>
+        <span
+          className="text-blue-600 cursor-pointer"
+          onClick={() => navigate("/signup")}
+        >
           Sign up
         </span>
       </p>
