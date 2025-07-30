@@ -7,7 +7,7 @@ import { greenToast } from '../utils/toastStyles';
 import { redToast } from '../utils/toastStyles';
 
 
-const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 const SignupPage = () => {
   const [username, setUsername] = useState(""); // matches backend

@@ -33,7 +33,7 @@ const mstRoutes = require('./routes/mstRoutes');
 
 const schedulerRoutes = require("./routes/scheduler");  
 
-const { config } = require('dotenv');
+
 
 
 app.use("/api", dijkstraRoutes);
