@@ -80,7 +80,7 @@ const navigate = useNavigate();
             <svg className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            <h1 className="text-xl font-bold text-gray-800">DSA Visualizer Lab</h1>
+            <h1 className="text-xl font-bold text-gray-800">Graph Visualizer Lab</h1>
           </div>
           <div>
             {isLoggedIn ? (
