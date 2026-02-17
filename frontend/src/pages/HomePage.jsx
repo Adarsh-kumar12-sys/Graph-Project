@@ -122,8 +122,8 @@ const navigate = useNavigate();
         </div>
         <div className="md:w-1/3 flex flex-col items-center animate-fade-in animation-delay-300">
         <div className="relative w-48 h-48">
-            <div className="absolute inset-0 w-full h-full rounded-full bg-gradient-to-tr from-blue-300 via-indigo-200 to-indigo-400 blur-2xl opacity-70 z-0 animate-pulse" />
-            <div className="relative z-10 w-48 h-48 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 p-1 flex items-center justify-center shadow-2xl">
+            {/* <div className="absolute inset-0 w-full h-full rounded-full bg-gradient-to-tr from-blue-300 via-indigo-200 to-indigo-400 blur-2xl opacity-70 z-0 animate-pulse" />
+            <div className="relative z-10 w-48 h-48 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 p-1 flex items-center justify-center shadow-2xl"> */}
             {/* <div className="w-full h-full rounded-full bg-white flex items-center justify-center"> */}
               {/* <svg className="h-32 w-32 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
@@ -134,9 +134,9 @@ const navigate = useNavigate();
 /> */}
 
             {/* </div> */}
-            </div>
+            {/* </div>
         </div>
-        <p className="mt-4 text-gray-700 font-semibold drop-shadow animate-fade-in-up animation-delay-500">Built by Amaan Ahmed</p>
+        <p className="mt-4 text-gray-700 font-semibold drop-shadow animate-fade-in-up animation-delay-500">Built by Amaan Ahmed</p> */}
         </div>
     </div>
     </section>
