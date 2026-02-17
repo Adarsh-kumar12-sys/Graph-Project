@@ -18,10 +18,10 @@ export default function Footer() {
         
         {/* Center: Social links */}
         <div className="flex gap-5 mt-3 md:mt-0">
-          <a href="https://github.com/Adarsh-kumar12-sys?tab=repositories" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
+          <a href="https://github.com//Adarsh-kumar12-sys?tab=repositories" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
             <FaGithub className="w-6 h-6" />
           </a>
-          <a href="https://www.linkedin.com/in/adarsh-kumar0412/" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
+          <a href="https://www.linkedin.com/in/adarsh-kumar0412//" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
             <FaLinkedin className="w-6 h-6" />
           </a>
           <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
@@ -31,7 +31,7 @@ export default function Footer() {
         
         {/* Right: Copyright */}
         <p className="text-sm text-gray-200 md:text-right">
-          <span className="font-semibold text-white">Adarsh Kumar  DTU &middot; 2026</span>
+          <span className="font-semibold text-white">Amaan Ahmed DTU &middot; 2026</span>
           <span className="ml-2 text-gray-400">| All rights reserved.</span>
         </p>
       </div>
