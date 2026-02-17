@@ -137,7 +137,7 @@ const navigate = useNavigate();
             </div>
             </div> */}
         </div>
-        <p className="mt-4 text-gray-700 font-semibold drop-shadow animate-fade-in-up animation-delay-500">Built by Adarsh Kumar</p>
+        // <p className="mt-4 text-gray-700 font-semibold drop-shadow animate-fade-in-up animation-delay-500">Built by Amaan Kumar</p>
         </div>
     </div>
     </section>
