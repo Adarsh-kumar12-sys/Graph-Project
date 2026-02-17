@@ -129,7 +129,6 @@ const navigate = useNavigate();
                 <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
               </svg> */}
                <img
-  src={}
   alt="Profile"
   className="object-cover w-full h-full rounded-full object-top scale-[0.98]"
 />
