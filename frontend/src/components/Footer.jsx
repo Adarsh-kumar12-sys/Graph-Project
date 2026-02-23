@@ -18,7 +18,7 @@ export default function Footer() {
         
         {/* Center: Social links */}
         <div className="flex gap-5 mt-3 md:mt-0">
-          <a href="https://github.com//Adarsh-kumar12-sys?tab=repositories" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
+          <a href="https://github.com" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
             <FaGithub className="w-6 h-6" />
           </a>
           <a href="https://www.linkedin.com/in/adarsh-kumar0412//" target="_blank" rel="noopener" className="hover:text-blue-300 transition">
